@@ -68,4 +68,34 @@ function all(array, callback){
     }
 }
 
+//Write a function called productOfArray which takes in an array of numbers and returns the product of them all
+// Sample:
+// var six = productOfArray([1,2,3]) // 6
+// var sixty = productOfArray([1,2,3,10]) // 60
+// console.log(six, sixty);
 
+function productOfArray(array){
+    if(array.length === 0){
+        return;
+    } else if (array.length === 1) {
+        return array[0];
+    }
+
+    if(array[0]){
+        array[1] *= array[0];
+        array.shift();
+        return productOfArray(array);
+    }
+}
+
+// Answer
+var six = productOfArray([1,2,3]) // 6
+var sixty = productOfArray([1,2,3,10]) // 60
+
+console.log(six, sixty);
+
+function productOfArray(array){ //more simple and efficient than my answer
+	if(array.length === 0) return 1;
+
+	return array.shift() * productOfArray(array);
+} 
