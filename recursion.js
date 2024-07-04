@@ -118,10 +118,6 @@ var nestedObject = {
     }
 }
 
-let hasIt = contains(nestedObject, 44); // true
-let doesntHaveIt = contains(nestedObject, "foo"); // false
-console.log(hasIt, doesntHaveIt);
-
 function contains(object, searchValue){
     // base case: if the one of the conditions is met, it means that the object is not an object itself, but rather a primitive value or null
     if(typeof object !== "object" || object === null){
@@ -135,4 +131,70 @@ function contains(object, searchValue){
         }
     }
     return false;
+}
+
+let hasIt = contains(nestedObject, 44); // true
+let doesntHaveIt = contains(nestedObject, "foo"); // false
+console.log(hasIt, doesntHaveIt);
+
+
+// Given a multi-dimensional integer array, return the total number of integers stored inside this array
+// Sample:
+var seven = totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]); // 7
+
+function totalIntegers(array = []){
+    if(array.length === 0) return 0;
+
+    let total = 0;
+    let first = array.shift();
+
+    if (Array.isArray(first)){
+        total += totalIntegers(first);
+    } else if (Number.isInteger(first)) {
+        total + 1;
+    }
+
+    return totalIntegers();
+}
+
+// Write a function that sums squares of numbers in list that may contain more lists
+
+function SumSquares(array = []){
+	if(array.length === 0) return 0;
+	let total = 0;
+
+	for(let i = 0; i < array.length; i++){
+		if(Array.isArray(array[i])){
+			total += SumSquares(array[i]);
+		} else {
+			total += array[i] * array[i];
+		}
+		
+	}
+	return total;
+}
+
+var l = [1,2,3]; 
+console.log(SumSquares(l)); // 1 + 4 + 9 = 14
+
+l = [[1,2],3]; 
+console.log(SumSquares(l)); // 1 + 4 + 9 = 14
+
+l = [[[[[[[[[1]]]]]]]]] 
+console.log(SumSquares(l)); // 1 = 1
+
+l = [10,[[10],10],[10]] 
+console.log(SumSquares(l)); // 100 + 100 + 100 + 100 = 400
+
+//The function should return an array containing repetitions of the number argument.
+//For instance, replicate(3, 5) should return [5,5,5]. If the times argument is negative, return an empty array.
+// Sample:
+console.log(replicate(3, 5)) // [5, 5, 5]
+console.log(replicate(1, 69)) // [69]
+console.log(replicate(-2, 6)) // []
+
+function replicate(times, num) {
+    if(times <= 0) return [];
+
+    return [num].concat(replicate(times - 1, num));
 }
