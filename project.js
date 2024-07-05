@@ -36,10 +36,10 @@ function mergeSort(array) {
     } 
 
     let chunk = Math.floor(array.length / 2);
-    let left = mergeSort(array.slice(0, chunk)); // Recursively sort the left half
-    let right = mergeSort(array.slice(chunk));   // Recursively sort the right half
+    let left = array.slice(0, chunk); // Recursively sort the left half
+    let right = array.slice(chunk);   // Recursively sort the right half
 
-    return merge(left, right);
+    return merge(mergeSort(left), mergeSort(right));
 }
 
 function merge(left, right) {
