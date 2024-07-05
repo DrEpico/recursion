@@ -27,3 +27,50 @@ function fibsRec(n, result = [0, 1]) {
   // Example usage:
   console.log(fibsRec(8)); // [0, 1, 1, 2, 3, 5, 8, 13]
   
+
+let array = [3, 2, 1, 13, 8, 5, 0, 1];
+ 
+function mergeSort(array) {
+    if (array.length <= 1) {
+        return array; // Fixed: should return 'array' instead of 'input'
+    } 
+
+    let chunk = Math.floor(array.length / 2);
+    let left = mergeSort(array.slice(0, chunk)); // Recursively sort the left half
+    let right = mergeSort(array.slice(chunk));   // Recursively sort the right half
+
+    return merge(left, right);
+}
+
+function merge(left, right) {
+    let result = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+
+    while (i < left.length) {
+        result.push(left[i]);
+        i++;
+    }
+
+    while (j < right.length) {
+        result.push(right[j]);
+        j++;
+    }
+
+    return result;
+}
+
+
+
+let output = mergeSort(array);
+console.log(output);
